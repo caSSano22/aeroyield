@@ -232,9 +232,132 @@
     ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
     ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
+
+    /* ══ PREMIUM ADDITIONS ══ */
+    body { cursor: none; }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 2px solid rgba(249,115,22,0.6); border-radius: 50%;
+      pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+      transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      mix-blend-mode: screen;
+    }
+    .cursor-dot {
+      position: fixed; width: 6px; height: 6px;
+      background: var(--orange); border-radius: 50%; pointer-events: none;
+      z-index: 9999; transform: translate(-50%,-50%);
+      box-shadow: 0 0 10px var(--orange);
+    }
+    @media (hover: none) { .cursor-ring, .cursor-dot { display: none; } body { cursor: auto; } }
+    #starCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .aurora-band {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.1;
+      animation: auroraDrift linear infinite;
+    }
+    .aurora-1 { width:900px;height:400px;top:-10%;left:-20%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);animation-duration:18s; }
+    .aurora-2 { width:700px;height:350px;top:30%;right:-15%;background:linear-gradient(135deg,#f97316,#fbbf24);animation-duration:14s;animation-delay:-4s; }
+    .aurora-3 { width:600px;height:300px;bottom:-5%;left:30%;background:linear-gradient(135deg,#06b6d4,#3b82f6);animation-duration:22s;animation-delay:-8s; }
+    @keyframes auroraDrift {
+      0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+      33%  { transform: translateY(-60px) translateX(40px) rotate(5deg); }
+      66%  { transform: translateY(40px) translateX(-30px) rotate(-3deg); }
+      100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    }
+    .scroll-progress { position:fixed;top:0;left:0;height:3px;z-index:200;background:linear-gradient(to right,var(--orange),var(--gold),var(--accent));width:0%;transition:width .1s linear; }
+    .float-cta { position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:50;opacity:0;transition:opacity .4s,transform .4s;pointer-events:none;white-space:nowrap; }
+    .float-cta.visible { opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0); }
+    .float-cta-inner { display:flex;align-items:center;gap:12px;background:rgba(5,10,26,.88);backdrop-filter:blur(20px);border:1px solid rgba(249,115,22,.3);border-radius:999px;padding:10px 20px 10px 16px;box-shadow:0 8px 32px rgba(0,0,0,.4); }
+    .float-cta-text { font-size:14px;font-weight:600;color:var(--muted); }
+    .float-cta-text strong { color:var(--white); }
+    /* COUNTER */
+    .counter-section { background:rgba(255,255,255,.015);border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
+    .counter-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border); }
+    @media(min-width:768px) { .counter-grid { grid-template-columns:repeat(4,1fr); } }
+    .counter-cell { background:rgba(5,10,26,.85);padding:40px 24px;text-align:center;position:relative;overflow:hidden;transition:background .3s; }
+    .counter-cell::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 120%,rgba(249,115,22,.07),transparent 70%);opacity:0;transition:opacity .3s; }
+    .counter-cell:hover { background:rgba(255,255,255,.04); }
+    .counter-cell:hover::before { opacity:1; }
+    .counter-val { font-size:clamp(38px,5vw,58px);font-weight:800;letter-spacing:-.04em;line-height:1;background:linear-gradient(135deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .counter-val.blue { background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text; }
+    .counter-val.green { background:linear-gradient(135deg,#22c55e,#4ade80);-webkit-background-clip:text;background-clip:text; }
+    .counter-label { font-size:13px;color:var(--muted);margin-top:8px;font-weight:600; }
+    .counter-sub { font-size:11px;color:rgba(255,255,255,.25);margin-top:4px; }
+    /* FLIGHT PATH */
+    .fp-box { border-radius:32px;padding:56px 48px;background:linear-gradient(135deg,rgba(5,10,26,.95),rgba(10,21,53,.9));border:1px solid rgba(59,130,246,.2);position:relative;overflow:hidden; }
+    @media(min-width:768px) { .fp-box { padding:72px 64px; } }
+    .fp-glow { position:absolute;top:-60px;right:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);pointer-events:none; }
+    .fp-h { text-align:center;margin-bottom:48px; }
+    .fp-h h2 { font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-.04em;margin-top:16px; }
+    .fp-h p { margin-top:10px;font-size:15px;color:var(--muted); }
+    .text-gradient { background:linear-gradient(135deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .fp-route { position:relative;height:6px;background:rgba(255,255,255,.08);border-radius:99px;margin:48px 0 16px; }
+    .fp-route-fill { height:100%;width:0;background:linear-gradient(to right,#22c55e,var(--orange));border-radius:99px;transition:width 2s cubic-bezier(.25,.46,.45,.94);position:relative; }
+    .fp-plane-icon { position:absolute;right:-16px;top:50%;transform:translateY(-50%);font-size:24px;filter:drop-shadow(0 0 14px rgba(249,115,22,.9)); }
+    .fp-stations { display:flex;justify-content:space-between;margin-top:24px; }
+    .fp-st { text-align:center;flex:1; }
+    .fp-st-dot { width:14px;height:14px;border-radius:50%;margin:0 auto 10px; }
+    .fp-st-dot.done { background:#22c55e;box-shadow:0 0 12px rgba(34,197,94,.6); }
+    .fp-st-dot.active { background:var(--orange);box-shadow:0 0 16px rgba(249,115,22,.8);animation:pulseDot 1.5s infinite; }
+    .fp-st-dot.future { background:rgba(255,255,255,.15); }
+    .fp-st-dot.moon { background:var(--gold);box-shadow:0 0 20px rgba(251,191,36,.6);animation:pulseDot 2s infinite; }
+    .fp-st-name { font-size:13px;font-weight:700; }
+    .fp-st-sub { font-size:11px;color:var(--muted);margin-top:2px; }
+    .fp-cards { display:grid;gap:14px;margin-top:40px; }
+    @media(min-width:768px) { .fp-cards { grid-template-columns:repeat(3,1fr); } }
+    .fp-card { border-radius:16px;padding:20px;border:1px solid var(--border);background:rgba(255,255,255,.03); }
+    .fp-card.done-c { background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.02));border-color:rgba(34,197,94,.25); }
+    .fp-card.active-c { background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(249,115,22,.03));border-color:rgba(249,115,22,.3); }
+    .fp-card-tag { font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px; }
+    .fp-card h4 { font-size:16px;font-weight:700;margin-bottom:6px; }
+    .fp-card p { font-size:13px;color:var(--muted);line-height:1.5; }
+    /* CREW */
+    .crew-section { padding:80px 0; }
+    .crew-box { border-radius:28px;padding:48px;background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px; }
+    @media(min-width:768px) { .crew-box { flex-direction:row;text-align:left;gap:72px; } }
+    .crew-text { flex:1; }
+    .live-badge { display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;color:#4ade80;margin-bottom:20px;animation:badgePulse 3s ease-in-out infinite; }
+    @keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.25)} 50%{box-shadow:0 0 0 8px rgba(34,197,94,0)} }
+    .crew-text h2 { font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1; }
+    .crew-text p { margin-top:14px;font-size:16px;color:var(--muted);line-height:1.6;max-width:400px; }
+    .crew-avatars-wrap { flex-shrink:0; }
+    .crew-avatars { display:flex;flex-wrap:wrap;gap:8px;max-width:300px;justify-content:center; }
+    .cavatar { width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(255,255,255,.04);transition:transform .2s,border-color .2s;animation:avatarIn .5s ease backwards;cursor:default; }
+    .cavatar:hover { transform:scale(1.25) translateY(-4px);border-color:var(--orange); }
+    @keyframes avatarIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+    .crew-count { margin-top:16px;text-align:center;font-size:26px;font-weight:800;color:var(--orange);letter-spacing:-.03em; }
+    .crew-count span { font-size:14px;color:var(--muted);font-weight:500; }
+    /* 3D TILT */
+    .tilt-card { transform-style:preserve-3d;will-change:transform; }
+    .tilt-glow { position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(249,115,22,.14),transparent 60%);pointer-events:none;opacity:0;transition:opacity .3s; }
+    .tilt-card:hover .tilt-glow { opacity:1; }
+    /* GRADIENT BORDER on active roadmap card */
+    .grad-border { position:relative;z-index:0; }
+    .grad-border::before { content:'';position:absolute;inset:-1.5px;border-radius:22px;z-index:-1;background:linear-gradient(135deg,var(--orange),#fbbf24,var(--accent),var(--orange));background-size:300% 300%;animation:gradShift 3s ease infinite; }
+    .grad-border::after { content:'';position:absolute;inset:0;border-radius:21px;background:linear-gradient(135deg,rgba(249,115,22,.09),rgba(251,191,36,.04));z-index:-1; }
+    @keyframes gradShift { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
   </style>
 </head>
 <body>
+
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="aurora">
+    <div class="aurora-band aurora-1"></div>
+    <div class="aurora-band aurora-2"></div>
+    <div class="aurora-band aurora-3"></div>
+  </div>
+  <canvas id="starCanvas"></canvas>
+  <div class="float-cta" id="floatCta">
+    <div class="float-cta-inner">
+      <span class="live-dot"></span>
+      <span class="float-cta-text"><strong>$AY</strong> · Real Flights. Real Yield.</span>
+      <a href="https://x.com/AeroYield" class="btn-nav" target="_blank" rel="noopener" style="padding:8px 16px;font-size:13px">Follow ✈️</a>
+    </div>
+  </div>
+
   <div class="bg-layer"></div>
   <div class="stars-layer" id="starsLayer"></div>
 
@@ -342,6 +465,32 @@
       </div>
     </div>
   </div>
+
+  <div class="counter-section">
+    <div class="counter-grid">
+      <div class="counter-cell">
+        <div class="counter-val" data-target="610" data-suffix="+">0</div>
+        <div class="counter-label">Co-Pilots Onboard</div>
+        <div class="counter-sub">& growing daily</div>
+      </div>
+      <div class="counter-cell">
+        <div class="counter-val blue" data-target="100" data-suffix="%">0</div>
+        <div class="counter-label">On-Chain Transparent</div>
+        <div class="counter-sub">fully verifiable</div>
+      </div>
+      <div class="counter-cell">
+        <div class="counter-val green" data-target="4" data-suffix=" Phases">0</div>
+        <div class="counter-label">Flight Plan Phases</div>
+        <div class="counter-sub">Phase 2 active now</div>
+      </div>
+      <div class="counter-cell">
+        <div class="counter-val" data-target="24" data-suffix="/7">0</div>
+        <div class="counter-label">AI Co-Pilot Active</div>
+        <div class="counter-sub">always watching routes</div>
+      </div>
+    </div>
+  </div>
+
   <div class="glow-div"></div>
 
   <!-- ABOUT -->
@@ -403,6 +552,36 @@
       </div>
     </div>
   </section>
+
+  <section class="section" style="padding-top:0" id="mission">
+    <div class="wrap">
+      <div class="fp-box reveal">
+        <div class="fp-glow"></div>
+        <div class="fp-h">
+          <span class="sec-tag">Mission Status</span>
+          <h2>The <span class="text-gradient">flight path</span><br/>to the moon 🌕</h2>
+          <p>Track exactly where AeroYield is right now — every $AY holder is on this mission</p>
+        </div>
+        <div class="fp-route">
+          <div class="fp-route-fill" id="fpFill">
+            <div class="fp-plane-icon">✈️</div>
+          </div>
+        </div>
+        <div class="fp-stations">
+          <div class="fp-st"><div class="fp-st-dot done"></div><div class="fp-st-name">🛤️ Runway</div><div class="fp-st-sub">Phase 1 ✅</div></div>
+          <div class="fp-st"><div class="fp-st-dot active"></div><div class="fp-st-name">🛫 Takeoff</div><div class="fp-st-sub">Phase 2 🟠</div></div>
+          <div class="fp-st"><div class="fp-st-dot future"></div><div class="fp-st-name">🌤️ Cruise</div><div class="fp-st-sub">Phase 3</div></div>
+          <div class="fp-st"><div class="fp-st-dot moon"></div><div class="fp-st-name">🌕 Moon</div><div class="fp-st-sub">Phase 4</div></div>
+        </div>
+        <div class="fp-cards">
+          <div class="fp-card done-c"><div class="fp-card-tag" style="color:#4ade80">✅ Completed</div><h4>Token Launch</h4><p>$AY live on Robinhood Chain · 600+ holders strong</p></div>
+          <div class="fp-card active-c"><div class="fp-card-tag" style="color:var(--orange)">🟠 In Progress</div><h4>AI Co-Pilot Dev</h4><p>Intelligence engine building · RWA partnerships forming</p></div>
+          <div class="fp-card"><div class="fp-card-tag" style="color:var(--muted)">⏳ Upcoming</div><h4>Real Yield Launch</h4><p>First RWA asset · Governance · CEX listings</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="glow-div"></div>
 
   <!-- TOKEN -->
@@ -448,6 +627,29 @@
       </div>
     </div>
   </section>
+
+  <div class="crew-section">
+    <div class="wrap">
+      <div class="crew-box reveal">
+        <div class="crew-text">
+          <div class="live-badge"><span class="chain-live"></span> Community Live</div>
+          <h2>600+ co-pilots<br/><span class="text-gradient">already onboard</span></h2>
+          <p>Join the growing crew of $AY holders navigating real-world aviation yield. Every holder is a co-pilot on this mission to the moon.</p>
+          <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href="https://x.com/AeroYield" class="btn-primary" target="_blank" rel="noopener" style="font-size:15px;padding:12px 28px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              Join the Crew
+            </a>
+          </div>
+        </div>
+        <div class="crew-avatars-wrap">
+          <div class="crew-avatars" id="crewAvatars"></div>
+          <div class="crew-count">600+ <span>co-pilots</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="glow-div"></div>
 
   <!-- ROADMAP -->
@@ -464,7 +666,7 @@
           <h3>Pre-Flight Checks</h3>
           <ul class="rm-list"><li class="done-li">Project conceptualization</li><li class="done-li">Robinhood Chain deployment</li><li class="done-li">X/Twitter launch &amp; community</li><li class="done-li">$AY token creation</li></ul>
         </div>
-        <div class="rmcard active reveal" style="transition-delay:.2s">
+        <div class="rmcard active grad-border reveal" style="transition-delay:.2s">
           <div class="rm-dot-row"><div class="rmdot active"></div><span class="rm-phase active">Phase 2 — Takeoff ✈️</span></div>
           <h3>Engines Running</h3>
           <ul class="rm-list"><li>Community growth &amp; onboarding</li><li>AI co-pilot v1 development</li><li>RWA partnership discussions</li><li>Initial DEX listing</li></ul>
@@ -541,6 +743,98 @@
     var barIO=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){setTimeout(function(){e.target.style.width=e.target.dataset.w+'%';},200);barIO.unobserve(e.target);}})},{threshold:.3});
     document.querySelectorAll('.dist-bar').forEach(function(b){barIO.observe(b);});
     document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+
+
+    /* ══ CANVAS SHOOTING STARS ══ */
+    (function(){
+      var canvas=document.getElementById('starCanvas');
+      var ctx=canvas.getContext('2d');
+      var W,H,stars=[],shooters=[];
+      function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+      resize();window.addEventListener('resize',resize,{passive:true});
+      for(var i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,op:Math.random()*.7+.1,spd:Math.random()*.008+.002,phase:Math.random()*Math.PI*2});
+      function Shooter(){this.reset();}
+      Shooter.prototype.reset=function(){this.x=Math.random()*W;this.y=Math.random()*H*.4;this.len=Math.random()*100+60;this.spd=Math.random()*7+4;this.angle=Math.PI/4+(Math.random()-.5)*.3;this.op=0;this.maxOp=Math.random()*.6+.3;this.alive=true;this.trail=[];};
+      Shooter.prototype.update=function(){this.trail.push({x:this.x,y:this.y});if(this.trail.length>18)this.trail.shift();this.x+=Math.cos(this.angle)*this.spd;this.y+=Math.sin(this.angle)*this.spd;if(this.op<this.maxOp)this.op+=.06;if(this.x>W+100||this.y>H+100)this.alive=false;};
+      Shooter.prototype.draw=function(){if(this.trail.length<2)return;ctx.beginPath();ctx.moveTo(this.trail[0].x,this.trail[0].y);for(var i=1;i<this.trail.length;i++)ctx.lineTo(this.trail[i].x,this.trail[i].y);var g=ctx.createLinearGradient(this.trail[0].x,this.trail[0].y,this.x,this.y);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(251,191,36,'+this.op+')');ctx.strokeStyle=g;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(this.x,this.y,2.5,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+this.op+')';ctx.fill();};
+      var lastShot=0;
+      function animate(t){
+        requestAnimationFrame(animate);ctx.clearRect(0,0,W,H);
+        var time=t*.001;
+        for(var i=0;i<stars.length;i++){var s=stars[i];var op=s.op*(0.6+0.4*Math.sin(time*s.spd*10+s.phase));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+op+')';ctx.fill();}
+        if(t-lastShot>2500+Math.random()*2500){shooters.push(new Shooter());lastShot=t;}
+        for(var j=shooters.length-1;j>=0;j--){shooters[j].update();shooters[j].draw();if(!shooters[j].alive)shooters.splice(j,1);}
+      }
+      requestAnimationFrame(animate);
+      var ol=document.getElementById('starsLayer');if(ol)ol.style.display='none';
+    })();
+
+    /* ══ CUSTOM CURSOR ══ */
+    (function(){
+      var ring=document.getElementById('cursorRing'),dot=document.getElementById('cursorDot');
+      if(!ring||!dot)return;
+      var rx=0,ry=0,dx=0,dy=0;
+      document.addEventListener('mousemove',function(e){dx=e.clientX;dy=e.clientY;dot.style.left=dx+'px';dot.style.top=dy+'px';},{passive:true});
+      document.querySelectorAll('a,button').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(251,191,36,.9)';});
+        el.addEventListener('mouseleave',function(){ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(249,115,22,.6)';});
+      });
+      (function animCursor(){rx+=(dx-rx)*.12;ry+=(dy-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor);})();
+    })();
+
+    /* ══ SCROLL PROGRESS ══ */
+    var pb=document.getElementById('scrollProgress');
+    window.addEventListener('scroll',function(){if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+
+    /* ══ ANIMATED COUNTERS ══ */
+    var counters=document.querySelectorAll('.counter-val[data-target]'),cDone=false;
+    function runCounters(){
+      if(cDone||!counters.length)return;
+      var r=counters[0].getBoundingClientRect();
+      if(r.top>window.innerHeight)return;
+      cDone=true;
+      counters.forEach(function(el){
+        var target=parseFloat(el.dataset.target),suffix=el.dataset.suffix||'',start=null,dur=1800;
+        (function step(t){if(!start)start=t;var p=Math.min((t-start)/dur,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(target*ease)+suffix;if(p<1)requestAnimationFrame(step);})(performance.now());
+      });
+    }
+    window.addEventListener('scroll',runCounters,{passive:true});
+    setTimeout(runCounters,500);
+
+    /* ══ FLIGHT PATH FILL ══ */
+    var fpFill=document.getElementById('fpFill'),fpDone=false;
+    function animFP(){if(fpDone||!fpFill)return;var r=fpFill.getBoundingClientRect();if(r.top>window.innerHeight+200)return;fpDone=true;setTimeout(function(){fpFill.style.width='38%';},400);}
+    window.addEventListener('scroll',animFP,{passive:true});
+    setTimeout(animFP,600);
+
+    /* ══ CREW AVATARS ══ */
+    var emojis=['🧑\u200d✈️','👩\u200d✈️','🧑\u200d🚀','👨\u200d💼','👩\u200d💻','🧑\u200d💻','👨\u200d🔬','👩\u200d🔬',
+                '🦊','🐯','🦅','🐉','🦁','🐺','🦋','🦄','🐬','🦚','🐧','🦜','🦩','🐙','🦑','🐠',
+                '🌟','💎','🚀','✈️','🌕','⚡','🔥','💰'];
+    var crewEl=document.getElementById('crewAvatars');
+    if(crewEl){for(var i=0;i<32;i++){var av=document.createElement('div');av.className='cavatar';av.style.animationDelay=(i*.045)+'s';av.style.background='hsl('+(Math.random()*360)+',25%,12%)';av.textContent=emojis[i%emojis.length];crewEl.appendChild(av);}}
+
+    /* ══ 3D CARD TILT ══ */
+    document.querySelectorAll('.acard,.hcard,.rmcard').forEach(function(card){
+      card.classList.add('tilt-card');
+      var g=document.createElement('div');g.className='tilt-glow';card.style.position='relative';card.appendChild(g);
+      card.addEventListener('mousemove',function(e){
+        var rect=card.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;
+        var rx2=((y-rect.height/2)/rect.height)*-10,ry2=((x-rect.width/2)/rect.width)*10;
+        card.style.transform='perspective(700px) rotateX('+rx2+'deg) rotateY('+ry2+'deg) translateZ(6px)';
+        g.style.setProperty('--mx',(x/rect.width*100)+'%');g.style.setProperty('--my',(y/rect.height*100)+'%');
+      },{passive:true});
+      card.addEventListener('mouseleave',function(){card.style.transform='';});
+    });
+
+    /* ══ FLOATING CTA ══ */
+    var fCta=document.getElementById('floatCta'),ctaOn=false;
+    window.addEventListener('scroll',function(){
+      if(!fCta)return;
+      if(window.scrollY>600&&!ctaOn){ctaOn=true;fCta.classList.add('visible');}
+      else if(window.scrollY<200&&ctaOn){ctaOn=false;fCta.classList.remove('visible');}
+    },{passive:true});
+
   </script>
 </body>
 </html>
